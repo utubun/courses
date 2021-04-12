@@ -1,0 +1,128 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Functions
+
+## Definition
+
+```{r}
+f <- function() {
+  message('I am a function!')
+}
+
+f()
+```
+
+### Simplified definition
+
+```{r}
+f <- function(x) x**2
+f(100)
+```
+### Similar notation for loops, and controls
+
+#### For loop
+
+```{r}
+for(i in 1:10) print(i**2)
+```
+```{r}
+for(x in 1:10) {
+  if(! x %% 2) print(x)
+}
+```
+
+
+## Anonymouse function:
+
+
+```{r}
+(function() print('Hello World!'))()
+```
+## Return statement
+
+Function returns the result of the last operation, or the value / evaluation result within the `return()` statement. All statements after `return` are simply ignorred.
+
+```{r}
+f <- function(x) {
+  x = x^2
+  if (x %% 2) {
+    message('x is odd!')
+    return(x)
+  }
+  message('x is even!')
+  return(x)
+  message('You will never see me!')
+}
+
+cat('For x == 2 function says:\n')
+f(2)
+cat('For x = 3 function says:\n')
+f(3)
+```
+
+## Pure functions vs functions with side effects
+
+Pure function given the same argument -- always return the same value and has no side effects.
+
+```{r}
+pure_func <- rep(sin(pi), 1000)
+sideffect <- plot(1:10, main = 'This plot is a sideffect. Function returns nothing')
+diff_val  <- list(rnorm(100), rnorm(100))
+```
+
+- Are all the results for the `pure_func` call are the same: `r length(unique(pure_func)) == 1`;
+- Is there is any value returned by `plot` function: `r sideffect`;
+- Are all the results returned by `rnorm()` the same: `r all.equal(diff_val[[1]], diff_val[[2]])`;
+
+```{r}
+f <- function(x) {
+  sapply(x,
+         function(datum) {
+           if (!is.na(datum) & !is.na(as.Date(datum))) {
+             return(sprintf('ISODate(%s)', datum))
+           }
+           return(NA_character_)
+         })
+}
+```
+
+### apply family
+
+```{r}
+set.seed(11235)
+x <- sample(1:100, 1000, replace = TRUE)
+
+res <- c()
+
+for(num in x) {
+  if(num %% 2) {
+    res <- c(res, num)
+  }
+}
+
+sprintf('There are %d odd numbers in your vector.', length(res))
+
+x <- 1:10
+names(x) <- letters[1:10]
+sapply(x, log)
+sapply(x, log, base = 16)
+sapply(x, '+', y = 1)
+```
+
+### Pipes
+
+```{r}
+x <- cars
+
+x %>%
+  mutate(
+    time = round(dist / speed, 2)
+  ) %T>%
+  head() %>%
+  group_by(speed) %>%
+  summarise(time = mean(time, na.rm = TRUE))
+```
+
