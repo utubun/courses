@@ -287,7 +287,7 @@ And even better option, is to never ever use anything except alphanumeric charac
 
 In Linux -- everything is a file. Not only your data files, but variouse hardvare devices represented as files in the Linux **f**ile **s**ystem.
 
-You can use a command `ls` to explore any directory *you have an access* to. The command accespts a *path* as it's argument (and youse your *current working directory* as default if you not specifying it) and a tones of *optional* arguments or *switches*. 
+You can use a command `ls` to explore any directory *you can access*. The command accespts a *path* as it's argument (and youse your *current working directory* as default if you not specifying it) and a tones of *optional* arguments or *switches*. 
 
 ```bash
 ls       # default representation
