@@ -41,6 +41,16 @@ echo echo
 
 ---
 
+# Comments
+
+Whatever you print after the hash symbol (`#`) will be ignorred by bash:
+
+```bash
+# Just ignore me
+```
+
+---
+
 # Print working directory
 
 There are moments when you want to know where (in which directory) you are.
@@ -61,8 +71,10 @@ Compare it to your prompt, you are probably seeing `~` (*tilde*) symbol instead 
 `cd` commands stands for **c**hange **d**irectory. With `cd` you can move from your *current directory* to any directory you want, if you provide a *path* to that directory.
 
 ```bash
-cd /data3 # change your working directory to data3, validate it with pwd
-cd ~      # return to your home directory, validate it with pwd 
+cd /data3    # change your working directory to data3
+pwd          # print your working directory
+cd ~         # return to your home directory
+pwd          # print your working directory 
 ```
 ---
 
@@ -71,12 +83,18 @@ cd ~      # return to your home directory, validate it with pwd
 Now, when you are at your *home directory* you can use a command `ls` to explore the directory content. The command accespts a *path* as it's argument (your *current working directory* as default if not specified) and a tones of *optional* arguments or *switches*. 
 
 ```bash
-ls       # default representation
-ls -l    # long format representation
-ls -lha  # long representation, human-readable, all files
+ls          # default representation
+ls -l       # long format representation
+ls -lha     # long representation, human-readable, all files
 ```
 
 If you accidently typed `sl` instead of `ls`: pray to the Old Gods and run away.
+
+---
+
+# Clean your screen
+
+Use `Ctrl` + `L` keystroke to clear your terminal window.
 
 ---
 
@@ -91,20 +109,20 @@ mkdir sandbox               # create a new directory 'sandbox'
 ls -lh                      # list files and directories
 cd sandbox                  # change directory to 'sandbox'
 pwd                         # print working directory
-mkdir -p data/raw01         # create subdirectory
-mkdir -p data/raw02         # create subdirectory
+mkdir -p ./data/raw01       # create subdirectory
+mkdir -p ./data/raw02       # create subdirectory
 tree                        # explore the dir structure
 ```
 
 ---
 
-# Creating the files
+# Creating files
 
 You can create an empty file with `touch` command. The command accept several optional arguments, and mandatory argument(s) -- a file name(s) you are going to create:
 
 ```bash
-touch ~/sandbox/data/raw01/dataset01.txt
-touch ~/sandbox/data/raw02/dataset02.txt
+touch ./data/raw01/dataset01.txt
+touch ./data/raw02/dataset02.txt
 tree
 ```
 ---
@@ -115,20 +133,20 @@ tree
 `cp` stands for **c**o**p**y, and is designed for copying files and directories. It accepts the path to the file or directory you want to copy, the destination path, and several optional arguments. For example `-R`, `-r`, or `--recursive` allows you to copy the content of your *source* directory *recursively*. Specifying switch `-t` before your *destination* path will instruct `cp` to copy all *source* files / directories into the *destination directory*.
 
 ```bash
-cp /sandbox/data/dataset03.txt -t ~/sandbox/data/raw02/
+cp /data3/sandbox/data/dataset03.txt -t ./data/raw02/
 ls -hl ./data/raw02
 ```
 
 ---
 
-# Moving the files
+# Moving files
 
 Now we realized that we have wrong directory structure: we don't need two sub-directories for our raw data, instead we want to store all our input datasets in `./data/raw` directory. Lets move our files. 
 
 To move a file (or directory) we use `mv` command. This command accepts path(s) to the files (directories) you are going to move, and destination path(s). 
 
 ```bash
-mv -v ~/sandbox/data/raw02/dataset*.txt -t ./data/raw01/
+mv -v ./data/raw02/dataset.txt -t ./data/raw01/
 tree
 ```
 
@@ -141,24 +159,24 @@ Notice how we use `-v` switch to make `mv` verbose, `-t` switch to specify *targ
 The fact that we can specify the name of our *destination file* allows us not ony *move* but also *rename* files and directories with `mv`. Lets rename our `~/data/raw01` directory into just `~/data/raw/`:
 
 ```bash
-mv -v ./sandbox/data/raw01/ ./data/raw
+mv -v ./data/raw01/ ./data/raw
 tree
 ```
 Notice that we use `-v` switch to make `mv` verbose.
 
 ---
 
-# Removing the files and directories
+# Removing files and directories
 
 Since we successfuly copied files, and renamed our target directory, we can remove `~/sandbox/data/raw02` directory we do not need anymore.
 
 We are going to use command `rm` which removes *files* or *directories*. To remove directories containing other files and directories, use `-r` or `-R` switch.
 
 ```bash
-rm -v ./data/raw02
+rm -rv ./data/raw02
 tree
 ```
-Above we use `-v` switch to make `rm` verbose. 
+Above we use `-v` switch to make `rm` verbose and `-r` switch to recursively remove the content of the directory. 
 
 ---
 
@@ -169,7 +187,7 @@ The command `ln` accepts to arguments *a target* and a *link_name*. When called 
 There is a big dataset located at `/data3/sandbox/` directory, it is too heavy, and we don't want to copy or move it around. Using `ln` command, we can create a symbolic link to this file in our working directory. 
 
 ```bash
-ln -s /data3/sandbox/big_dataset.txt ~/sandbox/data/raw/
+ln -s /data3/sandbox/data/big_dataset.txt ./data/raw/
 ls -lh ./data/raw
 ```
 
@@ -177,10 +195,10 @@ ls -lh ./data/raw
 
 # Reading the files
 
-Use `less` command to read the content of the files. The command accepts path to the file you want to read. You can navigate the file by using `Up` and `Down` arrow keys, or `PgUp` and `PgDn` keys etc (check the manual pages). To exit the document just press `Q`:
+The simplest command you can use for reading the content of the files is `cat`. Supply the `cat` with the path to your file, and read the content of the file on the screen. Other commands you can use are `more` and `less`.
 
 ```bash
-less big_dataset.txt    # press Q to exit
+cat ./data/raw/big_dataset.txt    # read the data file
 ```
 
 ---
@@ -190,23 +208,24 @@ less big_dataset.txt    # press Q to exit
 To clean our workspace, we are going to remove our `sandbox` project. We already know that to remove directory we can use `rm` command:
 
 ```bash
-cd ~             # Return to your home directory
-rm -R sandbox    # Remove your sandbox directory
+cd ~              # Return to your home directory
+rm -r sandbox     # Remove your sandbox directory
+ls -ahl           # List the content of the current directory
 ```
 
-Notice how we use `-R` switch to remove all subdirectories of `sandbox` directory.
+Notice how we use `-r` switch to remove all subdirectories of `sandbox` directory.
 
 ---
 
 # Getting help, examples
 
 ```bash
-# show manual pages for man command
+# show manual pages for man command, press Q to exit
 man man
-# short single-line description for man command
-whatis man
-# brows the help pages for man
-help man
+# short single-line description for cd command
+whatis cd
+# see the help pages for man
+help ls
 # the same but using switch instead of command
 man --help
 ```
