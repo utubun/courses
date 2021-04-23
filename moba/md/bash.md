@@ -268,6 +268,59 @@ and has a bunch available options:
 # id [OPTIONS] ... [USER]
 ```
 
+# Archiving the files
+
+## tar
+
+Archives created by tar are usually referred as tarballs. 
+
+### Options
+
+- `-c` stands for `create`, must be specified;
+- `-f` stands for `file`, the path to the output file, must be specified;
+- `-z` compress the archive with `gzip` compression;
+- `-x` eXtracts the archive;
+
+### Argument
+
+The last argument is the *path to the directory or file* which is giong to be tarballed.
+
+### Example
+
+```bash
+tar -cf mystorage.tar ~/dev
+```
+
+It's a *good practice* to create archives *from directory* containing the files rather than form the number of files, this way tarball *will be extracted* into the singel directory.
+
+The code above will create the archive. It will not affect the original files, and it will occupie the same space as an original files (it is *not compressed*). To compress the files, add `-z` option.
+
+```bash
+tar -czvf mystorage.tar ~/dev
+```
+The code above will will verbosely compress the archive with `gzip` algrorythm.
+
+To extract the archive, use `-x` option, and *if the archive was compressed with `gzip`, add `-z` option to extract it:
+
+```bash
+tar -xzvf storage.tar
+```
+
+## zip
+
+The `tar` command is rather complext, the more convinient way is to use `zip` command:
+
+```bash
+zip -r backup.zip ~/dev # create an archive
+unzip backup.zip        # unzip the archive
+```
+
+# Wildcards
+
+- `?` one potential character;
+- `*` any number of potential characters;
+
+
 ## Cloud hostings
 
 - [Digital Ocean](https://www.digitalocean.com/?refcode=1a3311232666) is a simple cloud hosting for developers. SSD cloud server in 55 seconds. $5 month. SSH and Shell access;
