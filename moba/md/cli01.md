@@ -23,13 +23,9 @@ marp: true
 
 # How to access CLI?
 
-## Systems running GUI interface
+If you are working on the system *with* **G**raphical **U**ser **I**nterface (*GUI*) CLI can be accessed through **terminal emulator**, e.g. on **Ubuntu** Linux push `<Ctrl> + <Alt> + T` to open terminal emulator.
 
-CLI can be accessed through **terminal emulator**, e.g. on **Ubuntu** Linux push <Ctrl> + <Alt> + T.
-
-## Systems without GUI
-
-You are in CLI right now. You don't need to do anything.
+Working on the systems *without* GUI, you can interact with it **only** through the CLI, as presumebly you are doing *right now*.
 
 ---
 
@@ -176,15 +172,6 @@ The simplest command you can try right now is `whoami`.
 # Who's here?
 
 You can see who is whorking on the server at the moment by typing... `who` command. By default it will show you the information about the users logged on. 
-
----
-
-# Where am I?
-
----
-
-# What is the command arguments?
-
 
 ---
 
