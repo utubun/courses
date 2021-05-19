@@ -15,9 +15,11 @@ Dmytro Strunin, MOBA BioInf <!--class:footer-->
 
 # What is shell?
 
-Shell is a program which serves as an interface between you and the **o**perating **s**ystem. It runs in your **terminal emulator** and allows you to your operation system. 
+Shell is a program which serves as an interface between you and the **o**perating **s**ystem. It runs in your **terminal emulator** and allows you to interact with the *kernel* of your system. 
 
-There are *many* such programms, which can be qualified as *shells*: *GUI*, *sh*, *csh*, *ksh*, *zsh*, *c*, *bash*.
+There are *many* such programms, which can be qualified as *shells*: **GUI**, **sh**, **csh**, **ksh**, **zsh**, **c**, **bash**.
+
+The **bash** shell is the most popular shell used across most of the Linux distributions.
 
 ---
 
@@ -31,9 +33,9 @@ There are *many* such programms, which can be qualified as *shells*: *GUI*, *sh*
 
 # Echo 
 
-### Usage
+### Intro
 
-`echo` is simply *echoing* anything you give it as an *argument*:
+`echo` simply prints into the terminal window anything you give it as an *argument*:
 
 ```bash
 echo Hello, bash!
@@ -44,23 +46,6 @@ In the example above  `Hello, bash!` and second `echo` are *arguments* the comma
 ### Hands-on
 
 Print a string *O Romeo, Romeo! Wherefore art thou Romeo?* into your screen.
-
----
-
-# Comments
-
-### Intro
-
-Sometimes, there are situations when you want bash to *ignore* whatever you type into the terminal emulator. To do that, you can use `#` (*hash*) symbol: 
-
-```bash
-# Just ignore me
-```
-Whatever you type after the hash, as well as hash itself is ignorred by bash, and considered as a *comment*.
-
-### Hands-on
-
-Type the string *Shall I hear more, or shall I speak at this?* into the terminal, so nobody hears what Romeo just said.
 
 ---
 
