@@ -53,17 +53,18 @@ Print a string *O Romeo, Romeo! Wherefore art thou Romeo?* into your screen.
 
 ### Intro
 
-A *brackets expansion* is a nice feauture of the bash which you can use in your work. Simply speaking, every argument listed within (arguments must be separated by `,`) `{}` will be evaluated separately:
+A *brackets expansion* is a nice feauture of the bash which you might find very interesting. To use brackets expansion, separate the arguments you are going to *expand* by the comma, and enclose them to the curly brackets `{}`.
 
 ```bash
 echo file_{a,b,c}.txt 
-echo file_{1..5}{a,b,c}
+echo file_{1..5}.txt
+echo file_{1..5}{a,b,c}.txt
 echo {a..z..2}
 ```
 
 ### Hands-on
 
-Find the way to print all odd numbers within the interval [1, 10]
+Find the way to print all odd numbers within the interval [1, 50]
 
 ---
 
@@ -179,7 +180,7 @@ Remove whole `sandbox` directory and it's subdirectories.
 
 ---
 
-# Couple of words on project structure
+# Note about the project structure
 
 ```
 sandbox
