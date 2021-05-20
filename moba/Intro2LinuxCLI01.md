@@ -244,7 +244,7 @@ It's usefull to have a ReadMe.md file in a root of your project directory, to do
 `cp` stands for **c**o**p**y. It accepts the path to the file or directory you want to copy, the destination path, and several optional arguments (e.g. `-R`, `-r` for *recursive*, `-t` for *destination* path).
 
 ```bash
-cp /home/dst20/cli02/data/txt/ncbi_links.txt -t ./data/in/txt
+cp /home/dst20/cli00/sandbox/data/txt/ncbi_links.txt -t ./data/in/txt
 ```
 
 ### Hands-on
@@ -395,22 +395,23 @@ wget path_to_our_remote_file -P path_to_target_directory
 
 ---
 
-# Assignment: Using wget with pipes
+# Using wget with pipes
 
-### Description
+### Intro
 
 Now when you know how to use `more` (or `less` or `cat`), pipes, grep and `wget` download genome assemblies matching the pattern matching the pattern `GCF_900`.
 
-### Plan
+#### Plan
 
 1. Read a file with the links;
 2. Redirrect output to `grep` and use only the links matching the pattern `GCF_900`;
 3. Redirrect output to `wget` and *instruct it* to use standard output as if it was a *input file*, download files into `./data/in/gbff` directory.
+
 ---
 
-# Answer to assignment: Using wget with pipes
+# Using wget with pipes
 
-### Description
+### Solution
 
 ```bash
 cat ./data/in/txt/ncbi_pa_assemblies_gbff.txt | grep GCF_900 | wget -i - -P ./data/in/gbff
@@ -418,9 +419,11 @@ cat ./data/in/txt/ncbi_pa_assemblies_gbff.txt | grep GCF_900 | wget -i - -P ./da
 ---
 
 
-# gzip archive files
+# Archives
 
-We downloaded an *archive* `.gz` files which have been created by `gnzip`. 
+### Intro
+
+We downloaded an *archive* `.gz` files which have been created by `gzip`. 
 
 To list the files in the archive we can use `gunzip` itself with the `-l` option which stands for `list files`:
 
@@ -433,9 +436,9 @@ Pipe the output from example above to appropriate command to find out how many `
 
 ---
 
-# Using gunzip for file extraction
+# Extracting archives
 
-### Usage
+### Intro
 
 We can unzip single `.gz` file using `gunzip` command as shown in example below:
 
@@ -452,7 +455,7 @@ Modify the example above to extract all the archived files into `./data/in/gbff/
 
 # Count with grep
 
-### Usage
+### Intro
 
 Remember how we used the `grep` command to find the particular pattern's match? Now, there is a useful optional argument `-c` which stands for **count**. Imagine we are trying to find how many copies of *amidohydrolase*'s gene can be found in particular assembly. We can use `grep` command to do this job:
 
@@ -466,7 +469,9 @@ Using `grep` command find how many copies of *oxidoreductase* (remember the quot
 
 ---
 
-# Gentle intro to regular expressions
+# Regular expressions
+
+### Intro
 
 Well, even with the examples above, we can see there are different number of coppies for different genes. What if we are insterested in counting of all the copies for each gene to find the genes which are overrepresented in a genome? 
 
@@ -479,7 +484,7 @@ Such patterns are called a *regular expressions*. Regular expressions rules is t
 
 # Using regular expressions with grep
 
-### Usage
+### Intro
 
 We are going to count all the matches for `product=.+` in the file `GCF_900185255.1_NN2_genomic.gbff`. In order to be able to do that, we have to use `-E` switch which tells `grep` that we are using **e**xtended regular expression as a pattern. As in previous example, we are going to feed `grep` with `-c` switch so we will receive *number* of matches, not the matches themselves.
 
@@ -495,6 +500,8 @@ Browse through the `.gbff` file from the example to find out where this number c
 ---
 
 # Sort grep output
+
+### Intro
 
 Well, obviously, in previous example we've just found the number of genes for the genome, because `grep` just counted the number of matches. It's nice, but we don't need it. Can we do it by hand, just browsing through the matches to pick the genes with high number of copies? We don't need `-c` this time, just `less`
 
@@ -514,7 +521,7 @@ Much better. But hey, it's 6426 genes and we have several hundreds genomes only 
 
 # Unique count
 
-## Usage
+## Intro
 
 There are the good news. We have another unique command in our toolbox it is... `uniq`. The command reports or omit adjucent repeated lines. It also accept `-c` switch to **c**ount repeated lines, and `-d` switch to print *only duplicated lines*. Lets try this:
 
@@ -530,11 +537,9 @@ Repeat the example above. **What** is the problem with the output? **Why**?
 
 # Add another sort to pipeline
 
-### Explanation
+### Intro
 
 The `sort` sorts `grep` output in alphabetical order, so when `uniq -dc` takes its turn, it counts all repeated lines in the very same order.
-
-### Solution
 
 The solution is to pipe the output into yet another `sort` command. We use `-n` and `-r` switches (*numeric sort* and *reverse* respectively), so the records with the highest counts appears atop.
 
@@ -549,7 +554,7 @@ Repeat the example and inspect the output.
 
 # Using grep for pattern match accross the files
 
-### Explanation
+### Intro
 
 It is possible to use `grep` to search patterns in several files. We can see that *LysR* is the gene with the highest copy number. Imagine we want to compare the copy number of *LysR* accross all assemblies in our `data` folder. We can do it this way:
 
@@ -565,11 +570,10 @@ Find the counts for *helix-turn-helix transcriptional regulator* using example a
 
 # Redirrecting standard output
 
-### Explanation
+### Intro
 
 We can see some numbers on the screen, which is fine. But we have to save our work some how. To *redirect* the output of *command* to the *file* we can use another tool, `>` or *redirrection operator*. 
 
-### Example
 
 ```bash
 grep -hc 'LysR family transcriptional regulator'  ./data/in/gbff/*.gbff > ./data/out/txt/LysR.txt
@@ -583,11 +587,9 @@ Repeat the example above. Use it as a template to save the results for *helix-tu
 
 # Saving data to csv file
 
-### Explanation
+### Intro
 
-Our datasets are stored in separate files. We can save both datasets into one `.csv` file. We can use another command `paste` for this purpose. The command merges lines of files given as an input arguments. By default line elements are separated by `<TAB>`.
-
-### Example
+Our datasets are stored in separate files. We can save both datasets into one `.csv` file. We can use another command `paste` for this purpose. The command merges lines of files given as an input arguments. By default line elements are separated by `<TAB>`. 
 
 ```bash
 paste -d , ./data/out/txt/LysR.txt ./data/out/txt/HTH.txt
@@ -601,13 +603,11 @@ Using the example above *redirrect the output* into `./data/out/csv/gene_count.c
 
 # Run scripts
 
-### Explanation
+### Intro
 
 I wrote shell script to visualize your data. You can run this simply by entering absolute or relative path to the script file.
 
 To run an R script, use `Rscript` followed by the path to the file.
-
-### Example
 
 We can run the script `myscript.sh` which is stored in `./src/sh` directory as follows:
 
@@ -617,13 +617,24 @@ Rscript ./src/sh/myscript.R
 
 ### Hands-on
 
-Copy the script from `./home/dst20/sandbox/src/r/runme.R` to your `./src/r` directory. Run the script using the example above as a template.
+Copy the script from `./home/dst20/cli00/sandbox/src/r/runme.R` to your `./src/r` directory. Run the script using the example above as a template.
 
 ---
 
 # Run script
 
 ![height:600px](./img/gene_count.png)
+
+---
+
+# Cleaning workspace
+
+Now please *clean your workspace* by changing to your home directory, and removing the `sandbox` directory.
+
+```bash
+cd ~
+rm -r sandbox
+```
 
 ---
 
