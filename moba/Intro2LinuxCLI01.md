@@ -332,7 +332,7 @@ tail ./data/in/txt/ncbi_pa_assemblies_gbff.txt -n 50 | head -n 3
 ```
 ### Hands-on
 
-Repeat the example avbove, but this time, try to find what are the first 2 lines of the last 123 lines of the `./data/in/txt/ncbi_pa_assemblies_gbff.txt` file.
+Repeat the example above, but this time, try to find what are the first 2 lines of the last 123 lines of the `./data/in/txt/ncbi_pa_assemblies_gbff.txt` file.
 
 ---
 
@@ -363,7 +363,7 @@ less ./data/in/txt/ncbi_pa_assemblies_gbff.txt
 ```
 ### Hands-on
 
-Browse the `./data/in/txt/ncbi_pa_assemblies_gbff.txt` with `more`, and locate the link to the `Pseudomonas_aeruginosa_PAKAF` assembly.
+Browse the `./data/in/txt/ncbi_pa_assemblies_gbff.txt` with `less`, and locate the link to the `Pseudomonas_aeruginosa_PAKAF` assembly.
 
 ---
 
@@ -527,7 +527,7 @@ Much better. But hey, it's 6426 genes and we have several hundreds genomes only 
 
 ## Intro
 
-There are the good news. We have another unique command in our toolbox it is... `uniq`. The command reports or omit adjucent repeated lines. It also accept `-c` switch to **c**ount repeated lines, and `-d` switch to print *only duplicated lines*. Lets try this:
+There are the good news. We have another unique command in our toolbox it is... `uniq`. The command reports or omit adjucent repeated l ines. It also accept `-c` switch to **c**ount repeated lines, and `-d` switch to print *only duplicated lines*. Lets try this:
 
 ```bash
 grep -E 'product=.+' ./data/in/gbff/GCF_900185255.1_NN2_genomic.gbff | sort | uniq -dc | less
